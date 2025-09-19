@@ -1,85 +1,136 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo">🔥</div>
+        <div class="titles">
+          <h1>Mexico Fire Map</h1>
+          <p>NASA FIRMS + Google Maps</p>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="link" href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noreferrer">NASA FIRMS</a>
+        <a class="link" href="https://developers.google.com/maps" target="_blank" rel="noreferrer">Google Maps</a>
+      </div>
+    </header>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <main class="app-content">
+      <RouterView />
+    </main>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+    <footer class="app-footer">
+      <span>Data: NASA FIRMS • Map: Google Maps</span>
+      <span>Theme: Ocean Professional</span>
+    </footer>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+:root {
+  --primary: #2563EB;
+  --secondary: #F59E0B;
+  --error: #EF4444;
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #111827;
+  --shadow: 0 10px 20px rgba(17, 24, 39, 0.06), 0 2px 6px rgba(17, 24, 39, 0.04);
+  --radius: 16px;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(59,130,246,0.08), #f9fafb 35%, #ffffff 100%);
+  color: var(--text);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(37,99,235,0.1);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 .logo {
-  display: block;
-  margin: 0 auto 2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), #60a5fa);
+  box-shadow: var(--shadow);
+  font-size: 20px;
 }
 
-nav {
-  width: 100%;
+.titles h1 {
+  font-size: 18px;
+  margin: 0;
+  color: var(--text);
+}
+.titles p {
   font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  margin: 0;
+  color: rgba(17,24,39,0.7);
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.actions {
+  display: flex;
+  gap: 10px;
+}
+.link {
+  color: var(--primary);
+  text-decoration: none;
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(37,99,235,0.15);
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(37,99,235,0.12);
+  background: linear-gradient(135deg, rgba(37,99,235,0.06), #fff);
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.app-content {
+  padding: 16px;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.app-footer {
+  padding: 14px 18px;
+  background: #fff;
+  border-top: 1px solid rgba(17,24,39,0.06);
+  color: rgba(17,24,39,0.65);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  font-size: 12px;
 }
 
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+@media (min-width: 960px) {
+  .app-content {
+    padding: 24px;
   }
 }
 </style>

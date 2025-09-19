@@ -1,45 +1,41 @@
-# vue-kavia
+# Mexico Fire Map (Vue 3 + Vite)
 
-This template should help get you started developing with Vue 3 in Vite.
+Interactive, responsive map of active fires over Mexico using NASA FIRMS hotspots and Google Maps.
 
-## Recommended IDE Setup
+Features:
+- Google Map centered on Mexico, mobile and desktop friendly
+- Fetches NASA FIRMS last-24h feed (VIIRS CSV), filters to Mexico
+- Color-coded markers: amber for day, blue for night
+- Click markers to view details (time, coordinates, confidence, brightness, FRP, satellite)
+- Refresh button to re-fetch
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Styling: Ocean Professional theme (blue & amber accents, minimalist, rounded corners, shadows, gradients)
 
-## Type Support for `.vue` Imports in TS
+Prerequisites:
+- Google Maps JavaScript API key with Maps JavaScript API enabled
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+Setup:
+1) Copy environment template and set your API key:
+```
+cp .env.example .env
+# edit .env and set VITE_GOOGLE_MAPS_API_KEY=YOUR_KEY
+```
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+2) Install dependencies:
+```
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
+3) Run the app:
+```
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
+Build for production:
+```
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+Notes:
+- Data source: NASA FIRMS. For production usage, review and adhere to FIRMS terms and usage limits.
+- The app fetches the 24h global CSV and filters client-side to Mexico bounding box.
