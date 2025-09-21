@@ -43,7 +43,8 @@ import { RouterView } from 'vue-router'
 
 .app-shell {
   min-height: 100vh;
-  background: linear-gradient(135deg, rgba(59,130,246,0.08), #f9fafb 35%, #ffffff 100%);
+  /* Use cream background globally behind content and map */
+  background: #FFFDD0;
   color: var(--text);
   display: grid;
   grid-template-rows: auto 1fr auto;

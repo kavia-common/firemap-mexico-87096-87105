@@ -4,6 +4,11 @@ html, body, #app {
   height: 100%;
 }
 
+/* Make sure the overall page background shows the cream color */
+html, body {
+  background: var(--color-background);
+}
+
 #app {
   margin: 0 auto;
   font-weight: normal;
