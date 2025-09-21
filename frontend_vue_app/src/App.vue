@@ -153,11 +153,10 @@ onBeforeUnmount(stopAuto)
       <RouterView />
     </main>
 
-    <!-- Vuetify footer with body-matching background and centered black text -->
+    <!-- Vuetify footer with cream background and centered black text -->
     <v-footer
       class="app-footer text-center"
       height="auto"
-      style="background: var(--color-background); border-top: 1px solid rgba(17,24,39,0.06);"
     >
       <div class="footer-inner">
         Jose Bernardo Sandoval Martinez Universidad Panamericana Made with Kavia AI
@@ -300,17 +299,20 @@ onBeforeUnmount(stopAuto)
 
 .app-footer {
   padding: 14px 18px;
-  background: var(--color-background); /* match body background */
+  /* Explicitly set cream background and ensure no dark theme overrides */
+  background: #FFFDD0 !important;
   border-top: 1px solid rgba(17,24,39,0.06);
-  color: #000; /* black text as requested */
+  color: #000 !important; /* black text as requested */
   display: grid;
   place-items: center;
   font-size: 12px;
+  /* Use Open Sans font to match the rest of the UI */
+  font-family: var(--open-sans-stack, 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif);
 }
 
 .footer-inner {
   text-align: center;
-  color: #000; /* enforce black */
+  color: #000 !important; /* enforce black */
 }
 
 @media (min-width: 960px) {
