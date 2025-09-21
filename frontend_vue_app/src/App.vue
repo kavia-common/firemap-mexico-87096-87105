@@ -76,11 +76,9 @@ onBeforeUnmount(stopAuto)
       <!-- Important info band under header -->
       <section class="info-band" aria-label="Important information on fire detection using NASA satellite systems">
         <div class="info-band__inner">
-          <h2>Why NASA Satellite Fire Detection Matters</h2>
+          <h2>Project Overview</h2>
           <p>
-            This area highlights timely information about wildfire activity detected by NASA’s FIRMS
-            satellites. Use this space to communicate best practices, safety updates, and data notes.
-            You can update this text anytime to reflect current priorities.
+            The webpage is an interactive platform that visualizes near real-time wildfire detections in Mexico using NASA’s FIRMS Area API. Fires are displayed on a modern, responsive map with color-coded markers that distinguish between daytime and nighttime detections, and users can access detailed information such as time, coordinates, confidence, and brightness for each event. The project’s goal is to make satellite fire data accessible and actionable, serving as the foundation for an early-warning system where future versions will allow users to define zones of interest and receive SMS alerts when fires are detected nearby. Ultimately, it seeks to bridge space technology with community safety, empowering farmers, local communities, and emergency services to respond more quickly and effectively to wildfire hazards.
           </p>
           <a class="info-link" href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noreferrer">
             Learn more about NASA FIRMS
