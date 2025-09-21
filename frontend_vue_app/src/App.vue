@@ -83,10 +83,11 @@ const placeholder =
     </v-main>
 
     <!-- Footer -->
-    <v-footer class="py-3" color="white" border="t">
-      <v-container class="d-flex justify-space-between align-center text-caption">
-        <span style="color: rgba(0,0,0,0.75)">Data: NASA FIRMS • Map: Google Maps</span>
-        <span style="color: rgba(0,0,0,0.75)">Theme: Ocean Professional</span>
+    <v-footer class="py-3 app-bg" border="t">
+      <v-container class="d-flex justify-center align-center text-caption">
+        <span style="color: #000; text-align: center;">
+          Jose Bernardo Sandoval Martinez Universidad Panamericana Made with Kavia AI
+        </span>
       </v-container>
     </v-footer>
   </v-app>
