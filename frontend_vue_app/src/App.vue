@@ -1,5 +1,60 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+/**
+ * Simple, dependency-free, minimal carousel state.
+ * Slides hold image URLs that can be easily replaced.
+ * By default, they point to a transparent placeholder.
+ */
+const placeholder =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640"><rect width="100%" height="100%" fill="#f3f4f6"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#111" font-size="28" font-family="Arial, sans-serif">Add your image in /public/assets and update slides[] in App.vue</text></svg>`
+  )
+
+const slides = ref([
+  { image: '/assets/detection.jpg' },
+  { image: '/assets/tracking.jpg' },
+  { image: '/assets/response.jpg' },
+])
+
+const currentIndex = ref(0)
+let timer: number | undefined
+
+function nextSlide() {
+  currentIndex.value = (currentIndex.value + 1) % slides.value.length
+}
+function prevSlide() {
+  currentIndex.value =
+    (currentIndex.value - 1 + slides.value.length) % slides.value.length
+}
+// PUBLIC_INTERFACE
+function goTo(i: number) {
+  /** Jump to a particular slide by index. */
+  if (i >= 0 && i < slides.value.length) currentIndex.value = i
+}
+
+function startAuto() {
+  stopAuto()
+  timer = window.setInterval(nextSlide, 6000)
+}
+function stopAuto() {
+  if (timer) {
+    window.clearInterval(timer)
+    timer = undefined
+  }
+}
+
+// If an image fails to load, replace with a neutral placeholder.
+function usePlaceholder(e: Event) {
+  const el = e.target as HTMLImageElement
+  if (!el) return
+  el.src = placeholder
+}
+
+onMounted(startAuto)
+onBeforeUnmount(stopAuto)
 </script>
 
 <template>
@@ -27,6 +82,68 @@ import { RouterView } from 'vue-router'
           <a class="info-link" href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noreferrer">
             Learn more about NASA FIRMS
           </a>
+        </div>
+      </section>
+
+      <!-- New minimal carousel directly below the header/info area -->
+      <section class="carousel" aria-label="Detection Tracking Response highlights">
+        <div class="carousel__viewport">
+          <div class="carousel__track" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+            <!-- Slide 1 -->
+            <article class="carousel__slide" aria-roledescription="slide" aria-label="1 of 3">
+              <div class="slide-media">
+                <!-- Replace src below with your image path, e.g., /assets/detection.jpg -->
+                <img
+                  :src="slides[0].image"
+                  alt="Detection slide image"
+                  @error="usePlaceholder($event)"
+                />
+              </div>
+              <p class="slide-caption">Detection: Use NASA FIRMS API to know when/where new fires ignite.</p>
+            </article>
+            <!-- Slide 2 -->
+            <article class="carousel__slide" aria-roledescription="slide" aria-label="2 of 3">
+              <div class="slide-media">
+                <!-- Replace src below with your image path, e.g., /assets/tracking.jpg -->
+                <img
+                  :src="slides[1].image"
+                  alt="Tracking slide image"
+                  @error="usePlaceholder($event)"
+                />
+              </div>
+              <p class="slide-caption">Tracking: Receiving signals on possible fire disasters</p>
+            </article>
+            <!-- Slide 3 -->
+            <article class="carousel__slide" aria-roledescription="slide" aria-label="3 of 3">
+              <div class="slide-media">
+                <!-- Replace src below with your image path, e.g., /assets/response.jpg -->
+                <img
+                  :src="slides[2].image"
+                  alt="Response slide image"
+                  @error="usePlaceholder($event)"
+                />
+              </div>
+              <p class="slide-caption">Response: Sending over SMS alerts on fire events near a place of choice/convenience</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="carousel__controls">
+          <button class="ctrl" aria-label="Previous slide" @click="prevSlide">‹</button>
+          <div class="dots" role="tablist" aria-label="Carousel Pagination">
+            <button
+              v-for="(s, i) in slides"
+              :key="i"
+              class="dot"
+              :class="{ active: i === currentIndex }"
+              @click="goTo(i)"
+              :aria-selected="i === currentIndex"
+              role="tab"
+              :aria-controls="`slide-${i+1}`"
+            />
+          </div>
+          <button class="ctrl" aria-label="Next slide" @click="nextSlide">›</button>
         </div>
       </section>
 
@@ -100,11 +217,11 @@ import { RouterView } from 'vue-router'
 
 .titles h1,
 .app-title {
-  font-size: 20px;
+  font-size: 22px;
   margin: 0;
   color: #000; /* enforce black */
-  /* Use Helixa font with fallbacks */
-  font-family: var(--helixa-stack, 'Helixa', 'Helvetica Neue', Helvetica, Arial, sans-serif);
+  /* Use Open Sans for the header title */
+  font-family: var(--open-sans-stack, 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif);
   font-weight: 700;
   letter-spacing: 0.2px;
 }
@@ -188,5 +305,116 @@ import { RouterView } from 'vue-router'
   .app-content {
     padding: 24px;
   }
+}
+
+/* Carousel - modern, minimal, black text */
+.carousel {
+  margin: 18px 0 22px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  color: #000; /* ensure captions and controls are black */
+  overflow: hidden;
+}
+
+.carousel__viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel__track {
+  display: flex;
+  transition: transform 450ms ease;
+  will-change: transform;
+}
+
+.carousel__slide {
+  min-width: 100%;
+  padding: 14px 14px 16px;
+  display: grid;
+  gap: 10px;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(248,250,252,0.5) 0%, rgba(255,255,255,0.65) 100%);
+}
+
+.slide-media {
+  width: 100%;
+  max-width: 960px;
+  aspect-ratio: 3 / 1.6;
+  background: #f3f4f6; /* neutral light gray if image missing while loading */
+  border: 1px dashed rgba(0,0,0,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.slide-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  color: transparent;
+  display: block;
+}
+
+.slide-caption {
+  margin: 2px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #000; /* enforce black */
+  text-align: center;
+  max-width: 980px;
+}
+
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 12px 14px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  background: rgba(255,255,255,0.8);
+}
+
+.ctrl {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #f8fafc;
+  color: #000;
+  font-size: 22px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.ctrl:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  background: #ffffff;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.dot:hover {
+  transform: scale(1.1);
+}
+.dot.active {
+  background: #000; /* active is solid black */
 }
 </style>

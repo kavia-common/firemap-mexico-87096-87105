@@ -39,3 +39,19 @@ npm run build
 Notes:
 - Data source: NASA FIRMS. For production usage, review and adhere to FIRMS terms and usage limits.
 - The app fetches the 24h global CSV and filters client-side to Mexico bounding box.
+
+Carousel images:
+- A 3-slide carousel appears directly below the header/info area with captions:
+  1) "Detection: Use NASA FIRMS API to know when/where new fires ignite."
+  2) "Tracking: Receiving signals on possible fire disasters"
+  3) "Response: Sending over SMS alerts on fire events near a place of choice/convenience"
+- To add your images:
+  1) Place files in `frontend_vue_app/public/assets/` as `detection.jpg`, `tracking.jpg`, `response.jpg` (or use your preferred names).
+  2) In `src/App.vue`, update the `slides` array to point to your filenames, e.g.:
+     const slides = ref([
+       { image: '/assets/my-detection.png' },
+       { image: '/assets/my-tracking.png' },
+       { image: '/assets/my-response.png' },
+     ])
+- If an image path is missing or fails to load, a neutral gray placeholder will be used automatically.
+- All carousel text is rendered in black; styling is minimal and modern.
