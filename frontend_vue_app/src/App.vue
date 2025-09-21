@@ -153,10 +153,16 @@ onBeforeUnmount(stopAuto)
       <RouterView />
     </main>
 
-    <footer class="app-footer">
-      <span>Data: NASA FIRMS • Map: Google Maps</span>
-      <span>Theme: Ocean Professional</span>
-    </footer>
+    <!-- Vuetify footer with body-matching background and centered black text -->
+    <v-footer
+      class="app-footer text-center"
+      height="auto"
+      style="background: var(--color-background); border-top: 1px solid rgba(17,24,39,0.06);"
+    >
+      <div class="footer-inner">
+        Jose Bernardo Sandoval Martinez Universidad Panamericana Made with Kavia AI
+      </div>
+    </v-footer>
   </div>
 </template>
 
@@ -294,14 +300,17 @@ onBeforeUnmount(stopAuto)
 
 .app-footer {
   padding: 14px 18px;
-  background: #fff;
+  background: var(--color-background); /* match body background */
   border-top: 1px solid rgba(17,24,39,0.06);
-  color: rgba(0,0,0,0.75); /* ensure black-based text */
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-between;
+  color: #000; /* black text as requested */
+  display: grid;
+  place-items: center;
   font-size: 12px;
+}
+
+.footer-inner {
+  text-align: center;
+  color: #000; /* enforce black */
 }
 
 @media (min-width: 960px) {
