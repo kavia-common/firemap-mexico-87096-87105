@@ -5,16 +5,13 @@ import { RouterView } from 'vue-router'
 <template>
   <div class="app-shell">
     <header class="app-header">
-      <div class="brand">
+      <div class="brand centered">
         <div class="titles">
-          <h1>Fire detection in Mexico using NASA's FIRMS API</h1>
+          <h1 class="app-title">Fire detection in Mexico using NASA's FIRMS API</h1>
           <p>NASA FIRMS + Google Maps</p>
         </div>
       </div>
-      <div class="actions">
-        <a class="link" href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noreferrer">NASA FIRMS</a>
-        <a class="link" href="https://developers.google.com/maps" target="_blank" rel="noreferrer">Google Maps</a>
-      </div>
+      <!-- Actions removed as requested -->
     </header>
 
     <main class="app-content">
@@ -70,11 +67,11 @@ import { RouterView } from 'vue-router'
   z-index: 10;
   background: #CDD9BA; /* requested hero/header background */
   border-bottom: 1px solid rgba(0,0,0,0.08);
-  padding: 14px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 16px 18px;
+  display: grid;
+  place-items: center;
   color: #000; /* ensure black text for all content in this section */
+  text-align: center;
 }
 
 /* Ensure ALL text in header is pure black, including nested links/spans/etc. */
@@ -94,46 +91,31 @@ import { RouterView } from 'vue-router'
   color: #000;
 }
 
+/* Ensure the brand container centers its contents horizontally */
+.centered {
+  justify-content: center;
+}
+
 /* logo removed as no emojis or logo should be shown near the heading */
 
-.titles h1 {
-  font-size: 18px;
+.titles h1,
+.app-title {
+  font-size: 20px;
   margin: 0;
   color: #000; /* enforce black */
+  /* Use Helixa font with fallbacks */
+  font-family: var(--helixa-stack, 'Helixa', 'Helvetica Neue', Helvetica, Arial, sans-serif);
+  font-weight: 700;
+  letter-spacing: 0.2px;
 }
 .titles p {
   font-size: 12px;
-  margin: 0;
+  margin: 4px 0 0 0;
   color: #000; /* enforce black for all text in header section */
   opacity: 0.85; /* subtle hierarchy while staying black */
 }
 
-/* Redundant safety to ensure links in header are black */
-.app-header .link {
-  color: #000 !important;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-}
-.link {
-  color: #000; /* black text as required within header */
-  text-decoration: none;
-  padding: 8px 10px;
-  font-size: 13px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.8);
-  border: 1px solid rgba(0,0,0,0.12);
-  box-shadow: var(--shadow);
-  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
-}
-.link:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
-  background: rgba(255,255,255,0.95);
-  color: #000;
-}
+/* Removed actions styles since the actions container is deleted */
 
 .app-content {
   padding: 16px;

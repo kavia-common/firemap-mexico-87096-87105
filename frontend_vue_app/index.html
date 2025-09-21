@@ -7,6 +7,34 @@
     <title>Mexico Fire Map - NASA FIRMS + Google Maps</title>
     <meta name="description" content="Interactive map of active fires in Mexico using NASA FIRMS data and Google Maps." />
     <meta name="theme-color" content="#2563EB" />
+    <!-- Try to load the 'Helixa' font if available; otherwise provide robust fallbacks -->
+    <style>
+      @font-face {
+        font-family: 'Helixa';
+        src: local('Helixa'), local('Helixa Regular');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Helixa';
+        src: local('Helixa Bold');
+        font-weight: 700;
+        font-style: bold;
+        font-display: swap;
+      }
+    </style>
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <!-- Fallback web font stack; if Helixa is not present locally, system fonts will be used -->
+    <style>
+      :root {
+        --helixa-stack: 'Helixa', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>
