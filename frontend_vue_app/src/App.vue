@@ -160,14 +160,15 @@ import { RouterView } from 'vue-router'
   margin: 0 0 6px 0;
   font-size: 18px;
   line-height: 1.3;
-  color: #0f172a;
+  color: #000; /* enforce pure black */
 }
 
 .info-band p {
   margin: 0 0 10px 0;
   font-size: 14px;
   line-height: 1.55;
-  color: #111827;
+  color: #000; /* enforce pure black */
+  opacity: 0.9;
 }
 
 .info-link {
@@ -193,7 +194,7 @@ import { RouterView } from 'vue-router'
   padding: 14px 18px;
   background: #fff;
   border-top: 1px solid rgba(17,24,39,0.06);
-  color: rgba(17,24,39,0.65);
+  color: rgba(0,0,0,0.75); /* ensure black-based text */
   display: flex;
   flex-wrap: wrap;
   gap: 10px;

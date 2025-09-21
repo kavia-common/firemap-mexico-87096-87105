@@ -179,25 +179,35 @@ onMounted(() => {
   justify-content: space-between;
   padding: 10px;
   background: #f3f4f6;
+  color: #000; /* ensure toolbar text is black */
 }
 
 .btn {
   padding: 6px 12px;
   border-radius: 8px;
-  background: #2563eb;
-  color: #fff;
+  background: #e5efff; /* lightened primary background to maintain contrast with black text */
+  color: #000; /* enforce black text */
   font-weight: 600;
-  border: none;
+  border: 1px solid rgba(0,0,0,0.12);
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+.btn:hover:not(:disabled) {
+  background: #f2f6ff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
 }
 .btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
+label, select {
+  color: #000; /* enforce black text on form controls */
+}
 .meta {
   font-size: 12px;
-  color: rgba(17, 24, 39, 0.7);
+  color: rgba(0, 0, 0, 0.7); /* keep readable but in black spectrum */
 }
 
 .map {

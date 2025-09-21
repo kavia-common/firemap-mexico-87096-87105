@@ -54,11 +54,12 @@ import FireMap from '@/components/FireMap.vue'
 .info-card h2 {
   margin-bottom: 6px;
   font-size: 20px;
-  color: var(--text);
+  color: #000; /* enforce pure black for the subtitle/header */
 }
 .info-card p {
   margin-bottom: 8px;
-  color: rgba(17,24,39,0.8);
+  color: #000; /* enforce pure black for body text in info card */
+  opacity: 0.85; /* preserve hierarchy while remaining black */
   font-size: 14px;
 }
 .info-card ul {
@@ -67,6 +68,7 @@ import FireMap from '@/components/FireMap.vue'
   display: grid;
   gap: 6px;
   font-size: 14px;
+  color: #000; /* ensure list text is pure black */
 }
 .dot {
   display: inline-block;
