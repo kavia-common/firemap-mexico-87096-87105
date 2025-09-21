@@ -14,9 +14,12 @@ const placeholder =
   )
 
 const slides = ref([
-  { image: '/assets/detection.jpg' },
-  { image: '/assets/tracking.jpg' },
-  { image: '/assets/response.jpg' },
+  // Slide 1 (Detection)
+  { image: '/assets/20250921_213509_viirs_detection.jpg' },
+  // Slide 2 (Tracking)
+  { image: '/assets/20250921_213508_tracking.jpeg' },
+  // Slide 3 (Response)
+  { image: '/assets/20250921_213508_response.jpg' },
 ])
 
 const currentIndex = ref(0)
