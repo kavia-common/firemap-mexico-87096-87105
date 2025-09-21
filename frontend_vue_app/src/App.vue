@@ -6,9 +6,8 @@ import { RouterView } from 'vue-router'
   <div class="app-shell">
     <header class="app-header">
       <div class="brand">
-        <div class="logo">🔥</div>
         <div class="titles">
-          <h1>Mexico Fire Map</h1>
+          <h1>Fire detection in Mexico using NASA's FIRMS API</h1>
           <p>NASA FIRMS + Google Maps</p>
         </div>
       </div>
@@ -54,42 +53,34 @@ import { RouterView } from 'vue-router'
   position: sticky;
   top: 0;
   z-index: 10;
-  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(37,99,235,0.1);
+  background: #CDD9BA; /* requested hero/header background */
+  border-bottom: 1px solid rgba(0,0,0,0.08);
   padding: 14px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: #000; /* ensure black text for all content in this section */
 }
 
 .brand {
   display: flex;
   gap: 12px;
   align-items: center;
+  color: #000;
 }
 
-.logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  background: linear-gradient(135deg, var(--primary), #60a5fa);
-  box-shadow: var(--shadow);
-  font-size: 20px;
-}
+/* logo removed as no emojis or logo should be shown near the heading */
 
 .titles h1 {
   font-size: 18px;
   margin: 0;
-  color: var(--text);
+  color: #000; /* enforce black */
 }
 .titles p {
   font-size: 12px;
   margin: 0;
-  color: rgba(17,24,39,0.7);
+  color: #000; /* enforce black for all text in header section */
+  opacity: 0.85; /* subtle hierarchy while staying black */
 }
 
 .actions {
@@ -97,20 +88,21 @@ import { RouterView } from 'vue-router'
   gap: 10px;
 }
 .link {
-  color: var(--primary);
+  color: #000; /* black text as required within header */
   text-decoration: none;
   padding: 8px 10px;
   font-size: 13px;
   border-radius: 10px;
-  background: #ffffff;
-  border: 1px solid rgba(37,99,235,0.15);
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.12);
   box-shadow: var(--shadow);
-  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 .link:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(37,99,235,0.12);
-  background: linear-gradient(135deg, rgba(37,99,235,0.06), #fff);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.95);
+  color: #000;
 }
 
 .app-content {
